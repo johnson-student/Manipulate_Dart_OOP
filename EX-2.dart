@@ -24,16 +24,16 @@ class Bank {
     // TODO
     String? _bankId;
     String name;
-    Map<String, BankAccount> _accounts = {};
+    List<BankAccount> _accounts = [];
     Bank({required this.name, required String? bankId}) {
         this._bankId = bankId;
     }
     BankAccount createAccount(String accountId, String accountOwner) {
-        if (_accounts.containsKey(accountId)) {
+        if (_accounts.any((account) => account.accountId == accountId)) {
             throw Exception('Account with ID $accountId already exists!');
         }
         BankAccount newAccount = BankAccount(accountId: accountId, accountOwner: accountOwner);
-        _accounts[accountId] = newAccount;
+        _accounts.add(newAccount);
         return newAccount;
     }
 
